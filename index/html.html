@@ -77,8 +77,8 @@
       box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
     }
     .info {
-      width: 110vw;
-      height: 110vh;
+      width: 100vw;
+      height: 100vh;
       text-shadow: 0px 0px 8px #ffffff, 0px 0px 15px #f70808, 0px 0px 25px #ffffff;
       letter-spacing: 4.5px;
       white-space: pre-wrap;
@@ -109,10 +109,22 @@
 </head>
 <body>
 
-<audio autoplay loop muted> 
-  <source src="index/voice.mp3" type="audio/mp3">
+<audio id="myAudio" autoplay loop>
+  <source src="https://files.catbox.moe/7985h0.mp3" type="audio/mp3">
 </audio>
-  
+
+<script>
+  // رفع الصوت لأعلى شي
+  document.getElementById("myAudio").volume = 1.0;
+
+  // تشغيل الصوت عند أول تفاعل (علشان المتصفحات ما تمنعه)
+  const playAudio = () => {
+    const audio = document.getElementById("myAudio");
+    audio.play().catch(e => console.log("Autoplay blocked"));
+  };
+</script>
+
+
   <div class="loading" id="loading">
     <h1>HACKED BY Marshal</h1>
     <div class="progress-container">
