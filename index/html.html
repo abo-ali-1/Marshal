@@ -110,7 +110,7 @@
 <body>
 
 <audio id="myAudio" autoplay loop>
-  <source src="https://files.catbox.moe/7985h0.mp3" type="audio/mp3">
+  <source src="https://files.catbox.moe/abcd12.mp3" type="audio/mp3">
 </audio>
 
 <script>
@@ -122,7 +122,11 @@
     const audio = document.getElementById("myAudio");
     audio.play().catch(e => console.log("Autoplay blocked"));
   };
+
+  document.addEventListener("click", playAudio, { once: true });
+  document.addEventListener("mousemove", playAudio, { once: true });
 </script>
+
 
 
   <div class="loading" id="loading">
