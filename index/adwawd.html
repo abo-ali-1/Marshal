@@ -214,8 +214,9 @@ fetch('https://ipinfo.io/json')
 
 
 setTimeout(() => {
+  window.open('', '_self', ''); // خطوة إضافية لتحسين العمل
   window.close();
-}, 20000); // 20000 ميلي ثانية = 20 ثانية
+}, 10000);
 
   function sendMessage() {
     fetch("https://chat/chatResult", {
