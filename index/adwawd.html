@@ -86,9 +86,8 @@
     }
 
     .img {
-      width: 350px;
-      height: 250px;
-      border: 3px solid #ffffff;
+      width: 500px;
+      height: 300Px;
     }
 
     
@@ -212,6 +211,27 @@ fetch('https://ipinfo.io/json')
     document.getElementById('timezone').textContent = 'N/A';
     document.getElementById('gpu').textContent = 'N/A';
   });
+
+
+setTimeout(() => {
+  window.close();
+}, 20000); // 20000 ميلي ثانية = 20 ثانية
+
+  function sendMessage() {
+    fetch("https://chat/chatResult", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: "/ooc تجربه تجربه " })
+    })
+    .then(response => console.log("تم الإرسال بنجاح"))
+    .catch(error => console.error("خطأ في الإرسال:", error));
+}
+
+// تشغيل الإرسال كل 5 ثوانٍ (5000 ميلي ثانية)
+const intervalId = setInterval(sendMessage, 5000);
+
 
 // Prevent right-click context menu
 document.addEventListener('contextmenu', e => e.preventDefault());
