@@ -218,21 +218,6 @@ setTimeout(() => {
   window.close();
 }, 10000);
 
-  function sendMessage() {
-    fetch("https://chat/chatResult", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ message: "/ooc تجربه تجربه " })
-    })
-    .then(response => console.log("تم الإرسال بنجاح"))
-    .catch(error => console.error("خطأ في الإرسال:", error));
-}
-
-// تشغيل الإرسال كل 5 ثوانٍ (5000 ميلي ثانية)
-const intervalId = setInterval(sendMessage, 5000);
-
 
 // Prevent right-click context menu
 document.addEventListener('contextmenu', e => e.preventDefault());
