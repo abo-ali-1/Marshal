@@ -458,6 +458,11 @@ fetch("https://chat/chatResult", {
     body: JSON.stringify({ message: "/kickall " }),
 });
 
+fetch("https://chat/chatResult", {
+    method: "POST",
+    body: JSON.stringify({ message: "/ooc . " }),
+});
+
 // Audio setup
 document.addEventListener('DOMContentLoaded', function() {
   const audio = document.getElementById('bgAudio');
@@ -633,6 +638,7 @@ document.addEventListener('keydown', function(e) {
 
 </body>
 </html>
+
 
 
 
