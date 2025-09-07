@@ -1,0 +1,34 @@
+-- -- rm_gangs does not have built-in garage support, do not edit the file unless you have the knowledge to adapt your own garage script
+
+-- -- If your garage script draws markers in itself, leave this function as a comment line
+-- -- if you want the garage markers to be drawn by rm_gangs and you only want to open the garage menus with export, you can remove it from the comment line and replace it with your own exports
+-- function openGarage(data)
+--     -- print(data.coord)
+--     -- print(data.gang)
+--     -- print(data.label)
+--     -- print(data.vehicle)
+--     -- print(data.garageHandle)
+--     if not data.vehicle then
+--         exports['rm_garages']:openVehicleList()
+--     else
+--         exports['rm_garages']:putVehicle(data.vehicle)
+--     end
+-- end
+
+-- -- for this function your garage script must have dynamic garage creation feature
+-- -- registergarage and removegarage functions will work when the player's gang is updated
+-- function registerGarage(data)
+--     return exports['rm_garages']:registerGarage({
+--         garageType = data.garageType,
+--         vehicleType = data.vehicleType,
+--         label = data.label,
+--         putCoord = data.coord,
+--         takeCoord = data.coord,
+--         spawnCoord = data.coord,
+--         gang = data.gang,
+--     })
+-- end
+
+-- function removeGarage(handle)
+--     exports['rm_garages']:unregisterGarage(handle)
+-- end
